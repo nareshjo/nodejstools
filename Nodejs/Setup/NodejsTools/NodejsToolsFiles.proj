@@ -17,6 +17,9 @@
         <File Include="Microsoft.NodejsTools.ProjectWizard.dll" />
         <File Include="Microsoft.NodejsTools.Analysis.dll" />
         <File Include="Microsoft.NodejsTools.TestAdapter.dll" />
+        <File Include="Microsoft.NodejsTools.Shared.dll" />
+        <File Include="Microsoft.NodejsTools.Telemetry.dll" />
+        <File Include="Microsoft.NodejsTools.VsTelemetry.dll" />
 
         <!-- Support Files -->
         <File Include="all.json" />

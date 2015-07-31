@@ -79,7 +79,6 @@
       <OutputSubPath>Node.js</OutputSubPath>
     </VSTemplate>
   </ItemDefinitionGroup>
-  
   <Choose>
     <When Condition="'$(VSTarget)' != '11.0' And '$(VSTarget)' != '12.0'">
       <ItemGroup>
@@ -97,6 +96,9 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Reference Include="Microsoft.NodejsTools.Shared">
+      <HintPath>..\..\Common\Microsoft.NodejsTools.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build, Version=$(MicrosoftBuildAssemblyVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.Build.Conversion.$(MicrosoftBuildAssemblyVersionSuffix), Version=$(MicrosoftBuildAssemblyVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.Build.Engine, Version=$(MicrosoftBuildAssemblyVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -1470,7 +1472,23 @@
       <Link>Resources\Icons\Images_32bit.png</Link>
     </None>
   </ItemGroup>
+  <Choose>
+    <When Condition="'$(VSTarget)' != '12.0' And '$(VSTarget)' != '11.0'">
+      <ItemGroup>
+		<Content Include="..\..\Common\Telemetry\Microsoft.NodejsTools.VsTelemetry.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		  <IncludeInVSIX>true</IncludeInVSIX>
+		  <VSIXSubpath>.</VSIXSubpath>
+		</Content>
+      </ItemGroup>
+    </When>
+  </Choose>
   <ItemGroup>
+    <Content Include="..\..\Common\Telemetry\Microsoft.NodejsTools.Shared.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <VSIXSubpath>.</VSIXSubpath>
+    </Content>
     <Content Include="..\Icons\SystemRegisteredICO\NodeJS.ico">
       <Link>NodeJS.ico</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1530,6 +1548,11 @@
       <IncludeInVSIX>true</IncludeInVSIX>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
+    <ProjectReference Include="..\Telemetry\Telemetry.csproj">
+      <Project>{d6fcbc60-f21e-4854-ac51-aed1a0a7c868}</Project>
+      <Name>Telemetry</Name>
+      <IncludeInVSIX>true</IncludeInVSIX>
     </ProjectReference>
     <ProjectReference Include="..\WebRole\WebRole.csproj">
       <Project>{712d84ec-b2a6-46d1-b030-ba697ae5e554}</Project>
